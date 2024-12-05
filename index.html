@@ -1,0 +1,357 @@
+<html lang="en"><head>
+    <meta name="referrer" content="no-referrer">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="..." crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="./admin/admin.css">
+    <link rel="stylesheet" href="./base.css">
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+
+</head>
+
+<body>
+
+
+
+
+
+
+    <div class="main">
+
+
+        <div class="pop-up-bg hide">
+
+
+
+
+
+        </div>
+
+        <div class="header">
+
+            <!-- <div class="search-bar" style="opacity: 0;">
+
+                <input type="text" name="" placeholder="Search">
+
+
+
+            </div> -->
+
+            <div class="header__toggle">
+                <i class="bx bx-menu nav__icon" id="header-toggle"></i>
+            </div>
+
+
+            <div class="right">
+
+                <div>
+
+                    <div class="notifIconDiv" onclick="showNotif()">
+                        <i class="bx bx-bell nav__icon"></i>
+                        <span class="notifCount" style="display: inline;">3</span>
+                    </div>
+
+
+
+                    <div id="popUpNotif" class="popup-notifications hide">
+
+                        <div class="head">
+
+                            <div>
+                                <i class="bx bx-bell"></i>
+                                <span>Recent Notifications</span>
+                            </div>
+
+
+                            <i class="bx bx-x" onclick="showNotif()"></i>
+                        </div>
+
+
+
+                        <div id="notifContent" class="notifContent">
+                            <!-- Notifications will be injected here -->
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <div class="profile">
+
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732450285/testUpload/dat2jellt2ata5zp16km.jpg" alt="User Profile">
+                    <span>
+                        Cyrusszz                    </span>
+                    <i><svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.17585 6.38027C6.79349 6.73088 6.20651 6.73088 5.82415 6.38027L1.03312 1.98704C0.360988 1.37072 0.797034 0.25 1.70896 0.25L11.291 0.25C12.203 0.25 12.639 1.37072 11.9669 1.98704L7.17585 6.38027Z" fill="#4D4D4D"></path>
+                        </svg></i>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+
+                    <a href="#" class="nav__link nav__logo">
+                        <i class="bx bxs-disc nav__icon" style="color:mediumaquamarine"></i>
+                        <span class="nav__logo-name">Library</span>
+                    </a>
+
+                    <div class="nav__list">
+                        <div class="nav__items">
+                            <h3 class="nav__subtitle">Profile</h3>
+
+                            <a href="./index.html" class="nav__link">
+                                <i class="bx bx-home nav__icon"></i>
+                                <span class="nav__name">Home</span>
+                            </a>
+
+
+                            <a href="./search-book.html" class="nav__link">
+                                <i class="bx bx-search nav__icon"></i>
+                                <span class="nav__name">Search</span>
+                            </a>
+
+
+                            <a href="./my-shelf.html" class="nav__link">
+                                <i class="bx bx-cabinet nav__icon"></i>
+                                <span class="nav__name">My Shelf</span>
+                            </a>
+
+                            <a href="./settings.html" class="nav__link">
+                                <i class="bx bx-cog nav__icon"></i>
+                                <span class="nav__name">Settings</span>
+                            </a>
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <a href="./db/html/user/logout.html" class="nav__link nav__logout">
+                    <i class="bx bx-log-out nav__icon"></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+
+
+
+
+
+
+        <div class="content">
+             <div class="block" id="home-page">
+
+     <div class="greeting-wrapper">
+         <h2>Today's Quote</h2>
+
+         <p>"Don't judge a book by its cover"</p>
+
+         <span>-George Eliot</span>
+
+         <div class="wrapper">
+
+             <i></i>
+             <i></i>
+             <i></i>
+             <i></i>
+
+         </div>
+     </div>
+
+     <div class="home-categories-wrapper">
+         <div class="left">
+             <span>Categories</span>
+         </div>
+
+         <div class="right">
+             <div class="item" onclick="setActiveCategory(this, 1)"><img src="https://membcdn.memorablequotations.com/1665726625726.jpg" alt="Action"><span>Action</span></div><div class="item" onclick="setActiveCategory(this, 2)"><img src="https://miblart.com/wp-content/uploads/2021/02/image6.png" alt="Romance"><span>Romance</span></div><div class="item" onclick="setActiveCategory(this, 3)"><img src="https://miblart.com/wp-content/uploads/2020/10/2LTd4fOY.jpeg" alt="Horror"><span>Horror</span></div><div class="item" onclick="setActiveCategory(this, 4)"><img src="https://pixel.nymag.com/imgs/daily/vulture/2018/05/splitsider/comedy-books/dangerously-funny-david-bianculli.w536.h804.2x.jpg" alt="Comedy"><span>Comedy</span></div><div class="item" onclick="setActiveCategory(this, 5)"><img src="https://i.pinimg.com/originals/1c/c1/cc/1cc1cc765525b2e84f61547f88be6554.jpg" alt="Fantasy"><span>Fantasy</span></div><div class="item" onclick="setActiveCategory(this, 6)"><img src="https://i5.walmartimages.com/asr/813929e4-b49f-4d7b-b4be-f2e23036901a_1.1da5f8bd4485fc4f3da948c4819a789b.jpeg" alt="Non-Fiction"><span>Non-Fiction</span></div>         </div>
+     </div>
+
+
+
+ </div>
+
+
+
+
+
+
+ <h2 style="color: #4d4d4d;">Good Morning</h2>
+
+ <div class="label">
+
+     <span>Recommendation for you</span>
+
+     <a href="./search-book.html" style="color: dimgray;"> <span> Show All</span>
+     </a>
+
+ </div>
+
+ <div class="books-wrapper">
+
+
+
+     <ul><li data-page="book-prev" onclick="viewBookClick(1)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731583572/testUpload/utm9fwv6y8oienucwz7r.jpg" alt="Salvos">
+                    <span class="title">Salvos</span>
+                    <span class="author">Melasd</span>
+                   
+        <span class="rating">4.0 / 5</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(2)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584282/testUpload/nxgwe6fv2wm2bma5cggt.jpg" alt="Azarinth Healer">
+                    <span class="title">Azarinth Healer</span>
+                    <span class="author">Rhaegar</span>
+                   
+        <span class="rating">4.0 / 5</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(3)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584523/testUpload/mbw9zruf5v7lpwtjvwuu.jpg" alt="Adulthood Is A Gift">
+                    <span class="title">Adulthood Is A Gift</span>
+                    <span class="author">Sarah Andersen</span>
+                   
+        <span class="rating">4.0 / 5</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(4)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg" alt="Konosuba">
+                    <span class="title">Konosuba</span>
+                    <span class="author">Natsume Atsuki</span>
+                   
+        <span class="rating">5.0 / 5</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(5)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001740/testUpload/x2wiyohpewdwacgiweuk.jpg" alt="Diary ng Panget">
+                    <span class="title">Diary ng Panget</span>
+                    <span class="author">HaveYouSeenThisGirL</span>
+                   
+        <span class="rating">--</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(6)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001857/testUpload/hmgi2dawggw6ycypundv.jpg" alt="Talk Back and You're Dead!">
+                    <span class="title">Talk Back and You're Dead!</span>
+                    <span class="author">Alesana Marie</span>
+                   
+        <span class="rating">5.0 / 5</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(7)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001981/testUpload/hlyovd2ggzgj3c1de1tf.png" alt="The PLAN: Manage Your Time Like a Lazy Genius">
+                    <span class="title">The PLAN: Manage Your Time Like a Lazy Genius</span>
+                    <span class="author">Kendra Adachi</span>
+                   
+        <span class="rating">--</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(8)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732002081/testUpload/cwlkv5yoqm0nztw4293j.jpg" alt="How to Walk into a Room: The Art of Knowing When to Stay and When to Walk Away">
+                    <span class="title">How to Walk into a Room: The Art of Knowing When to Stay and When to Walk Away</span>
+                    <span class="author">Emily P. Freeman</span>
+                   
+        <span class="rating">--</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(9)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732002178/testUpload/sfozkub0upux5aym88q2.jpg" alt="My Darling Dreadful Thing">
+                    <span class="title">My Darling Dreadful Thing</span>
+                    <span class="author">Johanna van Veen</span>
+                   
+        <span class="rating">--</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(10)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732002222/testUpload/fbxczikz8d032reqjk0f.jpg" alt="Diavola">
+                    <span class="title">Diavola</span>
+                    <span class="author">Jennifer Marie Thorne</span>
+                   
+        <span class="rating">--</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(11)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732238379/testUpload/niybkj9tgjcmacxwczi4.jpg" alt="Boneshaker">
+                    <span class="title">Boneshaker</span>
+                    <span class="author">Cherie Priest</span>
+                   
+        <span class="rating">--</span>
+    
+                </li><li data-page="book-prev" onclick="viewBookClick(12)">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732535061/testUpload/xe2z1pd6auufoqtsr0cv.jpg" alt="Salvos">
+                    <span class="title">Salvos</span>
+                    <span class="author">Melasd</span>
+                   
+        <span class="rating">4.0 / 5</span>
+    
+                </li></ul>
+
+ </div>
+
+
+
+
+ <script src="./user.js"></script>        </div>
+    </div>
+
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script src="./pages/user.js"></script>
+    <script src="./js/bookPrev.js"></script>
+    <script src="./js/payment.js"></script>
+    <script src="./js/userProfile.js"></script>
+    <script src="./js/userNotif.js"></script>
+
+
+    <script>
+        // Get the current URL's `page` query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentPage = urlParams.get('page') || 'dashboard'; // Default to 'dashboard'
+
+        // Get all nav links
+        const navLinks = document.querySelectorAll('.nav__link');
+
+        navLinks.forEach(link => {
+            // Check if the link's href matches the current page
+            const linkPage = new URL(link.href).searchParams.get('page');
+            if (linkPage === currentPage) {
+                link.classList.add('navActive');
+            } else {
+                link.classList.remove('navActive');
+            }
+        });
+
+        /*==================== SHOW NAVBAR ====================*/
+        const showMenu = (headerToggle, navbarId) => {
+            const toggleBtn = document.getElementById(headerToggle),
+                nav = document.getElementById(navbarId);
+
+            // Validate that variables exist
+            if (headerToggle && navbarId) {
+                toggleBtn.addEventListener('click', () => {
+                    // Toggle the menu visibility
+                    nav.classList.toggle('show-menu');
+                    // Change icon
+                    toggleBtn.classList.toggle('bx-x');
+                });
+            }
+        };
+        showMenu('header-toggle', 'navbar');
+    </script>
+
+
+
+
+<iframe name="__privateStripeMetricsController7450" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="https://js.stripe.com/v3/m-outer-3437aaddcdf6922d623e172c2d6f9278.html#url=http%3A%2F%2Flocalhost%2Flibrary-group%2F&amp;title=Document&amp;referrer=http%3A%2F%2Flocalhost%2Flibrary-group%2FsignIn.html&amp;muid=380f102f-4c44-4561-b0c6-496eaaaba0821fe8ec&amp;sid=NA&amp;version=6&amp;preview=false&amp;metaReferrerPolicy=no-referrer" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe></body></html>

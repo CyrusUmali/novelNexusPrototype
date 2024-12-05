@@ -1,0 +1,677 @@
+<html lang="en"><head>
+    <meta name="referrer" content="no-referrer">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="..." crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="./admin/admin.css">
+    <link rel="stylesheet" href="./base.css">
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+
+</head>
+
+<body>
+
+
+
+
+
+
+    <div class="main">
+
+
+        <div class="pop-up-bg hide">
+
+
+
+
+
+        </div>
+
+        <div class="header">
+
+            <!-- <div class="search-bar" style="opacity: 0;">
+
+                <input type="text" name="" placeholder="Search">
+
+
+
+            </div> -->
+
+            <div class="header__toggle">
+                <i class="bx bx-menu nav__icon" id="header-toggle"></i>
+            </div>
+
+
+            <div class="right">
+
+                <div>
+
+                    <div class="notifIconDiv" onclick="showNotif()">
+                        <i class="bx bx-bell nav__icon"></i>
+                        <span class="notifCount" style="display: inline;">3</span>
+                    </div>
+
+
+
+                    <div id="popUpNotif" class="popup-notifications hide">
+
+                        <div class="head">
+
+                            <div>
+                                <i class="bx bx-bell"></i>
+                                <span>Recent Notifications</span>
+                            </div>
+
+
+                            <i class="bx bx-x" onclick="showNotif()"></i>
+                        </div>
+
+
+
+                        <div id="notifContent" class="notifContent">
+                            <!-- Notifications will be injected here -->
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <div class="profile">
+
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732450285/testUpload/dat2jellt2ata5zp16km.jpg" alt="User Profile">
+                    <span>
+                        Cyrusszz                    </span>
+                    <i><svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.17585 6.38027C6.79349 6.73088 6.20651 6.73088 5.82415 6.38027L1.03312 1.98704C0.360988 1.37072 0.797034 0.25 1.70896 0.25L11.291 0.25C12.203 0.25 12.639 1.37072 11.9669 1.98704L7.17585 6.38027Z" fill="#4D4D4D"></path>
+                        </svg></i>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+
+                    <a href="#" class="nav__link nav__logo navActive">
+                        <i class="bx bxs-disc nav__icon" style="color:mediumaquamarine"></i>
+                        <span class="nav__logo-name">Library</span>
+                    </a>
+
+                    <div class="nav__list">
+                        <div class="nav__items">
+                            <h3 class="nav__subtitle">Profile</h3>
+
+                            <a href="./index.html" class="nav__link">
+                                <i class="bx bx-home nav__icon"></i>
+                                <span class="nav__name">Home</span>
+                            </a>
+
+
+                            <a href="./search-book.html" class="nav__link">
+                                <i class="bx bx-search nav__icon"></i>
+                                <span class="nav__name">Search</span>
+                            </a>
+
+
+                            <a href="./my-shelf.html" class="nav__link">
+                                <i class="bx bx-cabinet nav__icon"></i>
+                                <span class="nav__name">My Shelf</span>
+                            </a>
+
+                            <a href="./settings.html" class="nav__link">
+                                <i class="bx bx-cog nav__icon"></i>
+                                <span class="nav__name">Settings</span>
+                            </a>
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <a href="./db/php/user/logout.php" class="nav__link nav__logout">
+                    <i class="bx bx-log-out nav__icon"></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+
+
+
+
+
+
+        <div class="content">
+            <div class="books" id="booksPage">
+    <div class="upper-block">
+        <h3 onclick="fetchBooks()">Books</h3>
+
+        <div class="section">
+
+            <div class="search">
+                <i class="bx bx-search"></i>
+                <input type="text" placeholder="Search by Title" oninput="fetchBooks(this.value)">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="category-wrapper">
+
+
+
+        <select id="bookcategory" onchange="fetchBooks()">
+            <option value="" selected="">Category</option>
+            <option value="1">Action</option><option value="2">Romance</option><option value="3">Horror</option><option value="4">Comedy</option><option value="5">Fantasy</option><option value="6">Non-Fiction</option>        </select>
+
+
+
+    </div>
+
+    <div class="search-results">
+        <div class="result-wrapper">
+            <table class="books-table">
+                <thead>
+                    <tr>
+                        <td>Book Title</td>
+                        <td>Author</td>
+                        <td>Ratings</td>
+                        <td>Category</td>
+                        <td>Availability</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody id="booksTableBody"><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731583572/testUpload/utm9fwv6y8oienucwz7r.jpg" alt="Book Cover">
+                            <span class="span1">Salvos</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Melasd</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">4.0</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Fantasy, Fantasy</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="red">
+                            Loaned
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 1 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584282/testUpload/nxgwe6fv2wm2bma5cggt.jpg" alt="Book Cover">
+                            <span class="span1">Azarinth Healer</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Rhaegar</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">4.0</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Action, Comedy, Fantasy, Horror, Non-Fiction, Romance</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="red">
+                            Loaned
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue shelved" onclick="event.stopPropagation(); removeFromShelf(2,this )">
+                                <i class="bx bx-cabinet nav__icon"></i>  
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584523/testUpload/mbw9zruf5v7lpwtjvwuu.jpg" alt="Book Cover">
+                            <span class="span1">Adulthood Is A Gift</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Sarah Andersen</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">4.0</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Romance, Romance</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="red">
+                            Loaned
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 3 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg" alt="Book Cover">
+                            <span class="span1">Konosuba</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Natsume Atsuki</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">5.0</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Comedy</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="red">
+                            Loaned
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 4 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001740/testUpload/x2wiyohpewdwacgiweuk.jpg" alt="Book Cover">
+                            <span class="span1">Diary ng Panget</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">HaveYouSeenThisGirL</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">--</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Comedy, Romance</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="green">
+                            Available
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 5 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001857/testUpload/hmgi2dawggw6ycypundv.jpg" alt="Book Cover">
+                            <span class="span1">Talk Back and You're Dead!</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Alesana Marie</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">5.0</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Action, Comedy, Romance</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="green">
+                            Available
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 6 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001981/testUpload/hlyovd2ggzgj3c1de1tf.png" alt="Book Cover">
+                            <span class="span1">The PLAN: Manage Your Time Like a Lazy Genius</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Kendra Adachi</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">--</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Non-Fiction</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="green">
+                            Available
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 7 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732002081/testUpload/cwlkv5yoqm0nztw4293j.jpg" alt="Book Cover">
+                            <span class="span1">How to Walk into a Room: The Art of Knowing When to Stay and When to Walk Away</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Emily P. Freeman</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">--</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Non-Fiction</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="green">
+                            Available
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 8 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732002178/testUpload/sfozkub0upux5aym88q2.jpg" alt="Book Cover">
+                            <span class="span1">My Darling Dreadful Thing</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Johanna van Veen</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">--</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Fantasy, Horror</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="green">
+                            Available
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue shelved" onclick="event.stopPropagation(); removeFromShelf(9,this )">
+                                <i class="bx bx-cabinet nav__icon"></i>  
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732002222/testUpload/fbxczikz8d032reqjk0f.jpg" alt="Book Cover">
+                            <span class="span1">Diavola</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Jennifer Marie Thorne</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">--</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Horror</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="green">
+                            Available
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 10 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732238379/testUpload/niybkj9tgjcmacxwczi4.jpg" alt="Book Cover">
+                            <span class="span1">Boneshaker</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Cherie Priest</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">--</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Action, Comedy</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="green">
+                            Available
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 11 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr><tr>
+                    <td> 
+                        <div class="tdImg">
+                            <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732535061/testUpload/xe2z1pd6auufoqtsr0cv.jpg" alt="Book Cover">
+                            <span class="span1">Salvos</span>
+                        </div>
+                    </td> 
+                    <td>
+                        <div class="wrapper">
+                            <span class="span1">Melasd</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="rating">4.0</span>
+                    </td>
+                    <td>
+                        <div class="book-info">
+                            <span class="title">Fantasy, Fantasy</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="green">
+                            Available
+                        </span>
+                    </td>
+                    <td>
+                        
+                            <i class="blue" onclick="event.stopPropagation(); addToShelf(this , 12 )">
+                                <i class="bx bx-cabinet nav__icon"></i> 
+                            </i>
+                        
+                    </td>
+                </tr></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="pnotif-card" id="pnotif-card">
+
+
+        <div class="pnotif-icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" stroke-width="0" fill="currentColor" stroke="currentColor" class="pnotif-icon">
+                <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"></path>
+            </svg>
+        </div>
+        <div class="pnotif-message-text-container">
+            <p class="pnotif-message-text">Added to Shelf</p>
+        </div>
+        <svg onclick="removeToast()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" stroke-width="0" fill="none" stroke="currentColor" class="pnotif-cross-icon">
+            <path fill="currentColor" d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+        </svg>
+    </div>
+
+
+
+    <div class="pnotif-card" id="pnotif-card2">
+
+
+        <div class="pnotif-icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" stroke-width="0" fill="currentColor" stroke="currentColor" class="pnotif-icon">
+                <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"></path>
+            </svg>
+        </div>
+        <div class="pnotif-message-text-container">
+            <p class="pnotif-message-text">Removed from Shelf</p>
+        </div>
+        <svg onclick="removeToast()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" stroke-width="0" fill="none" stroke="currentColor" class="pnotif-cross-icon">
+            <path fill="currentColor" d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+        </svg>
+    </div>
+
+</div>        </div>
+    </div>
+
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script src="./pages/user.js"></script>
+    <script src="./js/bookPrev.js"></script>
+    <script src="./js/payment.js"></script>
+    <script src="./js/userProfile.js"></script>
+    <script src="./js/userNotif.js"></script>
+
+
+    <script>
+        // Get the current URL's `page` query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentPage = urlParams.get('page') || 'dashboard'; // Default to 'dashboard'
+
+        // Get all nav links
+        const navLinks = document.querySelectorAll('.nav__link');
+
+        navLinks.forEach(link => {
+            // Check if the link's href matches the current page
+            const linkPage = new URL(link.href).searchParams.get('page');
+            if (linkPage === currentPage) {
+                link.classList.add('navActive');
+            } else {
+                link.classList.remove('navActive');
+            }
+        });
+
+        /*==================== SHOW NAVBAR ====================*/
+        const showMenu = (headerToggle, navbarId) => {
+            const toggleBtn = document.getElementById(headerToggle),
+                nav = document.getElementById(navbarId);
+
+            // Validate that variables exist
+            if (headerToggle && navbarId) {
+                toggleBtn.addEventListener('click', () => {
+                    // Toggle the menu visibility
+                    nav.classList.toggle('show-menu');
+                    // Change icon
+                    toggleBtn.classList.toggle('bx-x');
+                });
+            }
+        };
+        showMenu('header-toggle', 'navbar');
+    </script>
+
+
+
+
+<iframe name="__privateStripeMetricsController6920" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="https://js.stripe.com/v3/m-outer-3437aaddcdf6922d623e172c2d6f9278.html#url=http%3A%2F%2Flocalhost%2Flibrary-group%2Findex.php%3Fpage%3Dsearch-book&amp;title=Document&amp;referrer=&amp;muid=380f102f-4c44-4561-b0c6-496eaaaba0821fe8ec&amp;sid=521cb6ae-6a09-46a2-a0f6-2caa6a4589bbab3443&amp;version=6&amp;preview=false&amp;metaReferrerPolicy=no-referrer" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe></body></html>

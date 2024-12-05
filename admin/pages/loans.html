@@ -1,0 +1,466 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../admin.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="..." crossorigin="anonymous">
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+
+    <!-- jQuery (necessary for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+
+
+
+    <div class="admin-main">
+
+        <div class="pop-up-bg hide   ">
+
+    
+        </div>
+
+
+        <div class="header">
+
+            <!-- <div class="search-bar" style="opacity: 0;">
+
+                <input type="text" name="" placeholder="Search">
+
+
+
+            </div> -->
+
+            <div class="header__toggle">
+                <i class="bx bx-menu nav__icon" id="header-toggle"></i>
+            </div>
+
+
+            <div class="profile">
+
+                <img src="../resources/admin.png">
+
+                <span>Admin</span>
+
+                <i><svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.17585 6.38027C6.79349 6.73088 6.20651 6.73088 5.82415 6.38027L1.03312 1.98704C0.360988 1.37072 0.797034 0.25 1.70896 0.25L11.291 0.25C12.203 0.25 12.639 1.37072 11.9669 1.98704L7.17585 6.38027Z" fill="#4D4D4D"></path>
+                    </svg>
+                </i>
+
+            </div>
+
+        </div>
+
+
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+
+                    <a href="#" class="nav__link nav__logo active">
+                        <i class="bx bxs-disc nav__icon"></i>
+                        <span class="nav__logo-name">Library</span>
+                    </a>
+
+                    <div class="nav__list">
+                        <div class="nav__items">
+                            <h3 class="nav__subtitle">Dashboard</h3>
+                            <a href="./dashboard.html" class="nav__link active">
+                                <i class="bx bxs-dashboard nav__icon"></i>
+                                <span class="nav__name">Dashboard</span>
+                            </a>
+                           
+
+                            <a href="./books.html" class="nav__link">
+                                <i class="bx bx-book-alt nav__icon"></i>
+                                <span class="nav__name">Books</span>
+                            </a>
+
+
+                            <a href="./users.html" class="nav__link">
+                                <i class="bx bx-user nav__icon"></i>
+                                <span class="nav__name">Users</span>
+                            </a>
+                         
+                            <a href="./loans.html" class="nav__link">
+                                <i class="bx bx-book-reader  nav__icon"></i>
+                                <span class="nav__name">Loans</span>
+                            </a>
+
+
+                            <a href="./return.html" class="nav__link">
+                                <i class="bx bx-book  nav__icon"></i>
+                                <span class="nav__name">Book Return</span>
+                            </a>
+
+
+
+                            <i class=""></i>
+                           
+
+
+                        </div>
+
+                      
+                    </div>
+                </div> 
+                <a href="../db/php/dashboard/adminLogout.php" class="nav__link nav__logout">
+                    <i class="bx bx-log-out nav__icon"></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+
+
+
+        <div class="content">
+             <div class="books " id="loansPage">
+
+     <div class="upper-block">
+
+         <h3>Book Loan Management</h3>
+
+
+         <div class="section">
+
+             <button onclick="showAddNewLoan()">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16 12.75H12.75V16C12.75 16.41 12.41 16.75 12 16.75C11.59 16.75 11.25 16.41 11.25 16V12.75H8C7.59 12.75 7.25 12.41 7.25 12C7.25 11.59 7.59 11.25 8 11.25H11.25V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V11.25H16C16.41 11.25 16.75 11.59 16.75 12C16.75 12.41 16.41 12.75 16 12.75Z" fill="white"></path>
+                 </svg>
+                 Add Entry
+
+             </button>
+
+             <div class="section">
+
+                 <div class="search">
+                     <i class="bx bx-search"></i>
+                     <input type="text" placeholder="Search by Name " oninput="loanSearch(event)">
+                 </div>
+             </div>
+
+         </div>
+
+     </div>
+
+
+     <div class="users-section" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius:20px;">
+
+         <div class="row2" style="width: 100%;box-shadow: unset">
+
+
+             <h3>Borrow History</h3>
+
+             <table class="overdueTbl">
+                 <thead>
+                     <tr>
+                         <td>Loan ID</td>
+                         <td>Member</td>
+                         <td>Book Title</td>
+                         <td>Start Date</td>
+                         <td>Return Date</td>
+                         <td>Status</td>
+                         <td>Fine</td>
+                         <td></td>
+                     </tr>
+                 </thead>
+
+                 <tbody><tr class="loan-row" data-id="28" data-member="mike lopez" data-book-id="4" data-book-title="Konosuba" data-loan-from="2024-12-05" data-loan-to="2024-12-05" data-status="Pending" data-fine="0" data-loan-id="38" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" data-book-cover="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg">
+                <td>38</td>
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" alt="Member Photo">
+                        <span>  mike lopez  </span>
+                    </div>
+                </td> 
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg" alt="Book Cover">
+                        <span>   Konosuba</span>
+                    </div>
+                </td> 
+                <td>2024-12-05</td>
+                <td>2024-12-05</td>
+                <td>Pending</td>
+                <td style="color: mediumseagreen;">0</td>
+                <td>
+                    <i class="bx bx-edit-alt nav__icon" onclick="editLoanClick(38)"></i>
+                    <i class="bx bx-trash nav__icon" onclick="deleteLoanClick(38)"></i>
+                    <i class="bx bx-bell nav__icon" onclick="notifyDaysLeft(38,28)"></i>
+                </td>
+            </tr><tr class="loan-row" data-id="28" data-member="mike lopez" data-book-id="4" data-book-title="Konosuba" data-loan-from="2024-12-05" data-loan-to="2024-12-05" data-status="Returned" data-fine="0" data-loan-id="37" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" data-book-cover="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg">
+                <td>37</td>
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" alt="Member Photo">
+                        <span>  mike lopez  </span>
+                    </div>
+                </td> 
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg" alt="Book Cover">
+                        <span>   Konosuba</span>
+                    </div>
+                </td> 
+                <td>2024-12-05</td>
+                <td>2024-12-05</td>
+                <td>Returned</td>
+                <td style="color: mediumseagreen;">0</td>
+                <td>
+                    <i class="bx bx-edit-alt nav__icon" onclick="editLoanClick(37)"></i>
+                    <i class="bx bx-trash nav__icon" onclick="deleteLoanClick(37)"></i>
+                    
+                </td>
+            </tr><tr class="loan-row" data-id="28" data-member="mike lopez" data-book-id="4" data-book-title="Konosuba" data-loan-from="2024-12-03" data-loan-to="2024-12-05" data-status="Returned" data-fine="25" data-loan-id="36" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" data-book-cover="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg">
+                <td>36</td>
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" alt="Member Photo">
+                        <span>  mike lopez  </span>
+                    </div>
+                </td> 
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg" alt="Book Cover">
+                        <span>   Konosuba</span>
+                    </div>
+                </td> 
+                <td>2024-12-03</td>
+                <td>2024-12-05</td>
+                <td>Returned</td>
+                <td style="color: mediumseagreen;">25</td>
+                <td>
+                    <i class="bx bx-edit-alt nav__icon" onclick="editLoanClick(36)"></i>
+                    <i class="bx bx-trash nav__icon" onclick="deleteLoanClick(36)"></i>
+                    
+                </td>
+            </tr><tr class="loan-row" data-id="28" data-member="mike lopez" data-book-id="4" data-book-title="Konosuba" data-loan-from="2024-12-03" data-loan-to="2024-12-05" data-status="Returned" data-fine="25" data-loan-id="35" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" data-book-cover="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg">
+                <td>35</td>
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" alt="Member Photo">
+                        <span>  mike lopez  </span>
+                    </div>
+                </td> 
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg" alt="Book Cover">
+                        <span>   Konosuba</span>
+                    </div>
+                </td> 
+                <td>2024-12-03</td>
+                <td>2024-12-05</td>
+                <td>Returned</td>
+                <td style="color: mediumseagreen;">25</td>
+                <td>
+                    <i class="bx bx-edit-alt nav__icon" onclick="editLoanClick(35)"></i>
+                    <i class="bx bx-trash nav__icon" onclick="deleteLoanClick(35)"></i>
+                    
+                </td>
+            </tr><tr class="loan-row" data-id="28" data-member="mike lopez" data-book-id="6" data-book-title="Talk Back and You're Dead!" data-loan-from="2024-12-05" data-loan-to="2024-12-05" data-status="Returned" data-fine="0" data-loan-id="34" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" data-book-cover="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001857/testUpload/hmgi2dawggw6ycypundv.jpg">
+                <td>34</td>
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" alt="Member Photo">
+                        <span>  mike lopez  </span>
+                    </div>
+                </td> 
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001857/testUpload/hmgi2dawggw6ycypundv.jpg" alt="Book Cover">
+                        <span>   Talk Back and You're Dead!</span>
+                    </div>
+                </td> 
+                <td>2024-12-05</td>
+                <td>2024-12-05</td>
+                <td>Returned</td>
+                <td style="color: mediumseagreen;">0</td>
+                <td>
+                    <i class="bx bx-edit-alt nav__icon" onclick="editLoanClick(34)"></i>
+                    <i class="bx bx-trash nav__icon" onclick="deleteLoanClick(34)"></i>
+                    
+                </td>
+            </tr><tr class="loan-row" data-id="12" data-member="Cyrus Umali Carbungco" data-book-id="4" data-book-title="Konosuba" data-loan-from="2024-12-01" data-loan-to="2024-12-03" data-status="Returned" data-fine="25" data-loan-id="33" data-photo="https://lh3.googleusercontent.com/a/ACg8ocLObWUoH03UfhI1-9D9jPSecUwmJJNd-fJANE02HbvlbqRBjtYw=s96-c" data-book-cover="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg">
+                <td>33</td>
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://lh3.googleusercontent.com/a/ACg8ocLObWUoH03UfhI1-9D9jPSecUwmJJNd-fJANE02HbvlbqRBjtYw=s96-c" alt="Member Photo">
+                        <span>  Cyrus Umali Carbungco  </span>
+                    </div>
+                </td> 
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584630/testUpload/cnkh7soqbkng3jhleyuu.jpg" alt="Book Cover">
+                        <span>   Konosuba</span>
+                    </div>
+                </td> 
+                <td>2024-12-01</td>
+                <td>2024-12-03</td>
+                <td>Returned</td>
+                <td style="color: tomato;">25</td>
+                <td>
+                    <i class="bx bx-edit-alt nav__icon" onclick="editLoanClick(33)"></i>
+                    <i class="bx bx-trash nav__icon" onclick="deleteLoanClick(33)"></i>
+                    
+                </td>
+            </tr><tr class="loan-row" data-id="12" data-member="Cyrus Umali Carbungco" data-book-id="6" data-book-title="Talk Back and You're Dead!" data-loan-from="2024-12-01" data-loan-to="2024-12-01" data-status="Returned" data-fine="0" data-loan-id="32" data-photo="https://lh3.googleusercontent.com/a/ACg8ocLObWUoH03UfhI1-9D9jPSecUwmJJNd-fJANE02HbvlbqRBjtYw=s96-c" data-book-cover="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001857/testUpload/hmgi2dawggw6ycypundv.jpg">
+                <td>32</td>
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://lh3.googleusercontent.com/a/ACg8ocLObWUoH03UfhI1-9D9jPSecUwmJJNd-fJANE02HbvlbqRBjtYw=s96-c" alt="Member Photo">
+                        <span>  Cyrus Umali Carbungco  </span>
+                    </div>
+                </td> 
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001857/testUpload/hmgi2dawggw6ycypundv.jpg" alt="Book Cover">
+                        <span>   Talk Back and You're Dead!</span>
+                    </div>
+                </td> 
+                <td>2024-12-01</td>
+                <td>2024-12-01</td>
+                <td>Returned</td>
+                <td style="color: mediumseagreen;">0</td>
+                <td>
+                    <i class="bx bx-edit-alt nav__icon" onclick="editLoanClick(32)"></i>
+                    <i class="bx bx-trash nav__icon" onclick="deleteLoanClick(32)"></i>
+                    
+                </td>
+            </tr><tr class="loan-row" data-id="24" data-member="Cyrusszz Carbungco" data-book-id="3" data-book-title="Adulthood Is A Gift" data-loan-from="2024-11-29" data-loan-to="2024-12-08" data-status="Loaned" data-fine="0" data-loan-id="31" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732450285/testUpload/dat2jellt2ata5zp16km.jpg" data-book-cover="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584523/testUpload/mbw9zruf5v7lpwtjvwuu.jpg">
+                <td>31</td>
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732450285/testUpload/dat2jellt2ata5zp16km.jpg" alt="Member Photo">
+                        <span>  Cyrusszz Carbungco  </span>
+                    </div>
+                </td> 
+                <td> 
+                    <div class="tdImg">
+                        <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731584523/testUpload/mbw9zruf5v7lpwtjvwuu.jpg" alt="Book Cover">
+                        <span>   Adulthood Is A Gift</span>
+                    </div>
+                </td> 
+                <td>2024-11-29</td>
+                <td>2024-12-08</td>
+                <td>Loaned</td>
+                <td style="color: mediumseagreen;">0</td>
+                <td>
+                    <i class="bx bx-edit-alt nav__icon" onclick="editLoanClick(31)"></i>
+                    <i class="bx bx-trash nav__icon" onclick="deleteLoanClick(31)"></i>
+                    <i class="bx bx-bell nav__icon" onclick="notifyDaysLeft(31,24)"></i>
+                </td>
+            </tr></tbody>
+             </table>
+
+
+             <div class="bottom">
+                 <ul class="page-ctrl" id="loansPagination">
+                     <a href="#" id="prev">
+                         <li><i class="bx bx-chevron-left"></i></li>
+                     </a>
+                     <!-- Dynamic page numbers will be inserted here -->
+                     <a class="page-number is-active" href="#"><li>1</li></a><a class="page-number" href="#"><li>2</li></a><a href="#" id="next">
+                         <li><i class="bx bx-chevron-right"></i></li>
+                     </a>
+                 </ul>
+             </div>
+
+
+
+         </div>
+
+
+
+
+     </div>
+
+
+
+
+
+     <div class="pnotif-card" id="pnotif-card">
+
+
+         <div class="pnotif-icon-container">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" stroke-width="0" fill="currentColor" stroke="currentColor" class="pnotif-icon">
+                 <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"></path>
+             </svg>
+         </div>
+         <div class="pnotif-message-text-container">
+             <p class="pnotif-message-text">User Notified</p>
+         </div>
+         <svg onclick="removeToast()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" stroke-width="0" fill="none" stroke="currentColor" class="pnotif-cross-icon">
+             <path fill="currentColor" d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+         </svg>
+     </div>
+
+
+
+ </div>        </div>
+    </div>
+
+
+
+
+
+<script src="./admin.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+
+<script>
+    // Get the current URL's `page` query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPage = urlParams.get('page') || 'dashboard'; // Default to 'dashboard'
+
+    // Get all nav links
+    const navLinks = document.querySelectorAll('.nav__link');
+
+    navLinks.forEach(link => {
+        // Check if the link's href matches the current page
+        const linkPage = new URL(link.href).searchParams.get('page');
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+
+    /*==================== SHOW NAVBAR ====================*/
+    const showMenu = (headerToggle, navbarId) => {
+        const toggleBtn = document.getElementById(headerToggle),
+            nav = document.getElementById(navbarId);
+
+        // Validate that variables exist
+        if (headerToggle && navbarId) {
+            toggleBtn.addEventListener('click', () => {
+                // Toggle the menu visibility
+                nav.classList.toggle('show-menu');
+                // Change icon
+                toggleBtn.classList.toggle('bx-x');
+            });
+        }
+    };
+    showMenu('header-toggle', 'navbar');
+</script>
+
+
+
+
+
+
+
+</body></html>

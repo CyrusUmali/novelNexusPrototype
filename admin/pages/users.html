@@ -1,0 +1,468 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../admin.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="..." crossorigin="anonymous">
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+
+    <!-- jQuery (necessary for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+
+
+
+    <div class="admin-main">
+
+        <div class="pop-up-bg hide   ">
+
+    
+        </div>
+
+
+        <div class="header">
+
+            <!-- <div class="search-bar" style="opacity: 0;">
+
+                <input type="text" name="" placeholder="Search">
+
+
+
+            </div> -->
+
+            <div class="header__toggle">
+                <i class="bx bx-menu nav__icon" id="header-toggle"></i>
+            </div>
+
+
+            <div class="profile">
+
+                <img src="../resources/admin.png">
+
+                <span>Admin</span>
+
+                <i><svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.17585 6.38027C6.79349 6.73088 6.20651 6.73088 5.82415 6.38027L1.03312 1.98704C0.360988 1.37072 0.797034 0.25 1.70896 0.25L11.291 0.25C12.203 0.25 12.639 1.37072 11.9669 1.98704L7.17585 6.38027Z" fill="#4D4D4D"></path>
+                    </svg>
+                </i>
+
+            </div>
+
+        </div>
+
+
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+
+                    <a href="#" class="nav__link nav__logo active">
+                        <i class="bx bxs-disc nav__icon"></i>
+                        <span class="nav__logo-name">Library</span>
+                    </a>
+
+                    <div class="nav__list">
+                        <div class="nav__items">
+                            <h3 class="nav__subtitle">Dashboard</h3>
+
+                            <a href="./dashboard.html" class="nav__link active">
+                                <i class="bx bxs-dashboard nav__icon"></i>
+                                <span class="nav__name">Dashboard</span>
+                            </a>
+                           
+
+                            <a href="./books.html" class="nav__link">
+                                <i class="bx bx-book-alt nav__icon"></i>
+                                <span class="nav__name">Books</span>
+                            </a>
+
+
+                            <a href="./users.html" class="nav__link">
+                                <i class="bx bx-user nav__icon"></i>
+                                <span class="nav__name">Users</span>
+                            </a>
+                         
+                            <a href="./loans.html" class="nav__link">
+                                <i class="bx bx-book-reader  nav__icon"></i>
+                                <span class="nav__name">Loans</span>
+                            </a>
+
+
+                            <a href="./return.html" class="nav__link">
+                                <i class="bx bx-book  nav__icon"></i>
+                                <span class="nav__name">Book Return</span>
+                            </a>
+
+
+
+                            <i class=""></i>
+                           
+
+
+                        </div>
+
+                      
+                    </div>
+                </div> 
+                <a href="../db/php/dashboard/adminLogout.php" class="nav__link nav__logout">
+                    <i class="bx bx-log-out nav__icon"></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+
+
+
+        <div class="content">
+             <div class="books " id="usersPage">
+
+     <div class="upper-block">
+
+         <h3>User Management</h3>
+
+
+
+         <div class="section">
+
+             <div class="search">
+                 <i class="bx bx-search"></i>
+                 <input type="text" oninput="userSearch(event)" placeholder="Search by Name " id="userSearch">
+             </div>
+         </div>
+
+
+
+     </div>
+
+
+     <div class="users-section">
+
+         
+
+
+
+         <div class="row2" style="max-height:400px; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  ">
+             <h3>Members List</h3>
+             <table class="overdueTbl">
+                 <thead>
+                     <tr>
+                         <td>User ID</td>
+                         <td>User Name</td>
+                         <td>Book Issued</td>
+                         <td>Plan</td>
+                     </tr>
+                 </thead>
+                 <tbody><tr class="user-row active-row" data-id="11" data-fname="Phi" data-lname="Sora" data-phone="" data-email="sora@gmail.com" data-status="Active" data-plan_id="1" data-plan_start="null" data-plan_end="null" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png">
+                <td>11</td>
+                <td class="tdImg">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" alt="User Image">
+                    Phi Sora
+                </td>
+                <td>2</td>
+                <td>Free</td>
+            </tr><tr class="user-row" data-id="12" data-fname="Cyrus" data-lname="Umali Carbungco" data-phone="" data-email="umalic65@gmail.com" data-status="Active" data-plan_id="2" data-plan_start="2024-12-03" data-plan_end="2025-01-03" data-photo="https://lh3.googleusercontent.com/a/ACg8ocLObWUoH03UfhI1-9D9jPSecUwmJJNd-fJANE02HbvlbqRBjtYw=s96-c">
+                <td>12</td>
+                <td class="tdImg">
+                    <img src="https://lh3.googleusercontent.com/a/ACg8ocLObWUoH03UfhI1-9D9jPSecUwmJJNd-fJANE02HbvlbqRBjtYw=s96-c" alt="User Image">
+                    Cyrus Umali Carbungco
+                </td>
+                <td>2</td>
+                <td>Pro</td>
+            </tr><tr class="user-row" data-id="22" data-fname="goho" data-lname="satory" data-phone="" data-email="gojo@gmail.com" data-status="Active" data-plan_id="1" data-plan_start="null" data-plan_end="null" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png">
+                <td>22</td>
+                <td class="tdImg">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" alt="User Image">
+                    goho satory
+                </td>
+                <td>0</td>
+                <td>Free</td>
+            </tr><tr class="user-row" data-id="24" data-fname="Cyrusszz" data-lname="Carbungco" data-phone="09776523759" data-email="0322-1935@lspu.edu.ph" data-status="Active" data-plan_id="1" data-plan_start="null" data-plan_end="null" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732450285/testUpload/dat2jellt2ata5zp16km.jpg">
+                <td>24</td>
+                <td class="tdImg">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732450285/testUpload/dat2jellt2ata5zp16km.jpg" alt="User Image">
+                    Cyrusszz Carbungco
+                </td>
+                <td>4</td>
+                <td>Free</td>
+            </tr><tr class="user-row" data-id="25" data-fname="mark" data-lname="lopez" data-phone="" data-email="mark@gmail.com" data-status="Active" data-plan_id="1" data-plan_start="null" data-plan_end="null" data-photo="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png">
+                <td>25</td>
+                <td class="tdImg">
+                    <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" alt="User Image">
+                    mark lopez
+                </td>
+                <td>0</td>
+                <td>Free</td>
+            </tr></tbody>
+             </table>
+
+
+             <div class="bottom" id="usersTablePaginationContainer">
+                 <ul class="page-ctrl" id="pagination">
+                     <a href="#" id="prev">
+                         <li><i class="bx bx-chevron-left"></i></li>
+                     </a>
+                     <!-- Dynamic page numbers will be inserted here -->
+                     <a class="page-number is-active" href="#"><li>1</li></a><a class="page-number" href="#"><li>2</li></a><a href="#" id="next">
+                         <li><i class="bx bx-chevron-right"></i></li>
+                     </a>
+                 </ul>
+             </div>
+
+
+
+         </div>
+
+         
+
+         <div class="user-profile">
+
+             <div class="head">
+
+                 <div class="left">
+
+                     <div class="left-1">
+                         <img id="profileImage" src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png" alt="">
+                     </div>
+
+
+                     <div class="left-2">
+                         <b id="userName">Phi Sora</b><br>
+
+                         <!-- <label for="">https://res.cloudinary.com/dk41ykxsq/image/upload/v1731586683/Screenshot_2024-11-14_201603-removebg-preview_1_mxqeaq.png</label> -->
+                     </div>
+
+
+
+                 </div>
+
+                 <!-- <button>Update</button> -->
+
+             </div>
+
+             <form action="" class="user-profile-form">
+                 <b>Change User Information Here <i class="bx bx-trash"></i></b>
+                 <div class="row">
+                     <div>
+                         <label for="fname">First Name</label>
+                         <input style="background-color: whitesmoke;" readonly="" type="text" id="fname" value="Phi">
+                     </div>
+                     <div>
+                         <label for="lname">Last Name</label>
+                         <input style="background-color: whitesmoke;" readonly="" type="text" id="lname" value="Sora">
+                     </div>
+
+
+                 </div>
+
+                 <div class="row">
+                     <div>
+                         <label for="phone">Phone Number</label>
+                         <input style="background-color: whitesmoke;" readonly="" type="text" id="phone" value="">
+                     </div>
+
+                     <div>
+                         <label for="email">Email</label>
+                         <input style="background-color: whitesmoke;" readonly="" type="text" id="email" value="sora@gmail.com">
+                     </div>
+
+                 </div>
+                 <div class="row">
+
+                     <div>
+                         <label for="plan">Subscription Plan</label>
+                         <select id="plan">
+                                                              <option value="1" selected="">
+                                     Free                                 </option>
+                                                              <option value="2">
+                                     Pro                                 </option>
+                                                              <option value="3">
+                                     Elite                                 </option>
+                                                      </select>
+                     </div>
+
+                     <div>
+                         <label for="status">Status</label>
+                         <select id="status">
+                             <option value="Active" selected="">Active</option>
+                             <option value="Restricted">Restricted</option>
+                             <option value="Banned">Banned</option>
+                         </select>
+                     </div>
+                 </div>
+
+
+
+                 <div class="row">
+
+                     <div>
+                         <label for="">From</label>
+                         <input type="date" name="loan_from" id="plan_start">
+                     </div>
+
+                     <div>
+                         <label for="">To</label>
+                         <input type="date" name="loan_to" id="plan_end">
+                     </div>
+                 </div>
+
+
+
+
+                 <button type="button" id="updateButton">Update Information</button>
+             </form>
+
+             <div class="row2" style="width: 100%;">
+
+
+                 <h3>Borrowed History</h3>
+
+                 <table class="overdueTbl">
+
+                     <thead>
+                         <tr>
+                             <td>Loan ID</td>
+                             <td>Book Title</td>
+                             <td>Start Date</td>
+                             <td>Return Date</td>
+                             <td>Status</td>
+                         </tr>
+                     </thead>
+
+                     <tbody id="userLoanHistory"><tr>
+                            <td>24</td>
+                        
+                              <td class="tdImg">
+                                 <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1731583572/testUpload/utm9fwv6y8oienucwz7r.jpg" alt="User Image">
+                                Salvos
+                                 </td>
+                            <td>2024-11-27</td>
+                            <td>2024-11-30</td>
+                            <td>Overdue</td>
+                        </tr><tr>
+                            <td>23</td>
+                        
+                              <td class="tdImg">
+                                 <img src="https://res.cloudinary.com/dk41ykxsq/image/upload/v1732001740/testUpload/x2wiyohpewdwacgiweuk.jpg" alt="User Image">
+                                Diary ng Panget
+                                 </td>
+                            <td>2024-11-20</td>
+                            <td>2024-11-21</td>
+                            <td>Returned</td>
+                        </tr></tbody>
+
+
+                 </table>
+
+                 <!-- <div class="bottom">
+                     <ul class="page-ctrl">
+                         <a href="#">
+                             <li> <i class='bx bx-chevron-left'></i></li>
+                         </a>
+                         <a class="is-active" href="#">
+                             <li>1</li>
+                         </a>
+                         <a href="#">
+                             <li>2</li>
+                         </a>
+                         <a href="#">
+                             <li>3</li>
+                         </a>
+                         <a href="#">
+                             <li>4</li>
+                         </a>
+                         <a href="#">
+                             <li>5</li>
+                         </a>
+
+                         <a href="#">
+                             <li> <i class='bx bx-chevron-right'></i></li>
+                         </a>
+                     </ul>
+
+
+
+                 </div> -->
+
+
+
+             </div>
+
+
+
+
+         </div>
+
+     </div>
+
+
+
+
+ </div>        </div>
+    </div>
+
+
+
+
+
+<script src="./admin.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+
+<script>
+    // Get the current URL's `page` query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPage = urlParams.get('page') || 'dashboard'; // Default to 'dashboard'
+
+    // Get all nav links
+    const navLinks = document.querySelectorAll('.nav__link');
+
+    navLinks.forEach(link => {
+        // Check if the link's href matches the current page
+        const linkPage = new URL(link.href).searchParams.get('page');
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+
+    /*==================== SHOW NAVBAR ====================*/
+    const showMenu = (headerToggle, navbarId) => {
+        const toggleBtn = document.getElementById(headerToggle),
+            nav = document.getElementById(navbarId);
+
+        // Validate that variables exist
+        if (headerToggle && navbarId) {
+            toggleBtn.addEventListener('click', () => {
+                // Toggle the menu visibility
+                nav.classList.toggle('show-menu');
+                // Change icon
+                toggleBtn.classList.toggle('bx-x');
+            });
+        }
+    };
+    showMenu('header-toggle', 'navbar');
+</script>
+
+
+
+
+
+
+
+</body></html>

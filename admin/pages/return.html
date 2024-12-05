@@ -1,0 +1,270 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../admin.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="..." crossorigin="anonymous">
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+
+    <!-- jQuery (necessary for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+
+
+
+    <div class="admin-main">
+
+        <div class="pop-up-bg hide   ">
+
+    
+        </div>
+
+
+        <div class="header">
+
+            <!-- <div class="search-bar" style="opacity: 0;">
+
+                <input type="text" name="" placeholder="Search">
+
+
+
+            </div> -->
+
+            <div class="header__toggle">
+                <i class="bx bx-menu nav__icon" id="header-toggle"></i>
+            </div>
+
+
+            <div class="profile">
+
+                <img src="../resources/admin.png">
+
+                <span>Admin</span>
+
+                <i><svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.17585 6.38027C6.79349 6.73088 6.20651 6.73088 5.82415 6.38027L1.03312 1.98704C0.360988 1.37072 0.797034 0.25 1.70896 0.25L11.291 0.25C12.203 0.25 12.639 1.37072 11.9669 1.98704L7.17585 6.38027Z" fill="#4D4D4D"></path>
+                    </svg>
+                </i>
+
+            </div>
+
+        </div>
+
+
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+
+                    <a href="#" class="nav__link nav__logo active">
+                        <i class="bx bxs-disc nav__icon"></i>
+                        <span class="nav__logo-name">Library</span>
+                    </a>
+
+                    <div class="nav__list">
+                        <div class="nav__items">
+                            <h3 class="nav__subtitle">Dashboard</h3>
+
+                            <a href="./dashboard.html" class="nav__link active">
+                                <i class="bx bxs-dashboard nav__icon"></i>
+                                <span class="nav__name">Dashboard</span>
+                            </a>
+                           
+
+                            <a href="./books.html" class="nav__link">
+                                <i class="bx bx-book-alt nav__icon"></i>
+                                <span class="nav__name">Books</span>
+                            </a>
+
+
+                            <a href="./users.html" class="nav__link">
+                                <i class="bx bx-user nav__icon"></i>
+                                <span class="nav__name">Users</span>
+                            </a>
+                         
+                            <a href="./loans.html" class="nav__link">
+                                <i class="bx bx-book-reader  nav__icon"></i>
+                                <span class="nav__name">Loans</span>
+                            </a>
+
+
+                            <a href="./return.html" class="nav__link">
+                                <i class="bx bx-book  nav__icon"></i>
+                                <span class="nav__name">Book Return</span>
+                            </a>
+
+
+                            <i class=""></i>
+                           
+
+
+                        </div>
+
+                      
+                    </div>
+                </div> 
+                <a href="../db/php/dashboard/adminLogout.php" class="nav__link nav__logout">
+                    <i class="bx bx-log-out nav__icon"></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+
+
+
+        <div class="content">
+            <div class="books " id="returnsPage">
+
+    <div class="upper-block">
+
+        <h3>Book Return Management</h3>
+
+
+        <div class="section">
+
+
+
+            <!-- <div class="section">
+
+                <div class="search">
+                    <i class='bx bx-search'></i>
+                    <input type="text" placeholder="Search by Name or Id">
+                </div>
+            </div> -->
+
+        </div>
+
+    </div>
+
+
+    <div class="users-section" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius:20px;">
+
+        <div class="row2" style="width: 100%;box-shadow: unset;">
+
+
+            <h3>Pending Book Return</h3>
+
+            <table class="overdueTbl">
+                <thead>
+                    <tr>
+                        <td>Loan ID</td>
+                        <td>Member</td>
+                        <td>Book Title</td>
+                        <td>Start Date</td>
+                        <td>Return Date</td>
+                        <td>Status</td>
+
+                        <td></td>
+                    </tr>
+                </thead>
+
+                <tbody><tr class="loan-row" data-id="28" data-member="mike lopez" data-book-id="4" data-book-title="Konosuba" data-loan-from="2024-12-05" data-loan-to="2024-12-05" data-status="Pending" data-fine="38">
+                    <td>38</td>
+                    <td>mike lopez</td>
+                    <td>Konosuba</td>
+                    <td>2024-12-05</td>
+                    <td>2024-12-05</td>
+                    <td>Pending</td>
+                    <td>
+                        <div class="action-wrapper"> 
+                            <i class="bx bx-check-square nav__icon" onclick="showConfirmBookReturn(38)"></i>
+                            <i class="bx bx-message-square-x nav__icon" onclick="showRejectBookReturn(38)"></i> 
+                        </div>
+                    </td>
+                </tr></tbody>
+            </table>
+
+
+            <div class="bottom">
+                <ul class="page-ctrl" id="returnsPagination">
+                    <a href="#" id="prev">
+                        <li><i class="bx bx-chevron-left"></i></li>
+                    </a>
+                    <!-- Dynamic page numbers will be inserted here -->
+                    <a class="page-number is-active" href="#"><li>1</li></a><a class="page-number" href="#"><li>2</li></a><a href="#" id="next">
+                        <li><i class="bx bx-chevron-right"></i></li>
+                    </a>
+                </ul>
+            </div>
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+</div>        </div>
+    </div>
+
+
+
+
+
+<script src="./admin.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+
+<script>
+    // Get the current URL's `page` query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPage = urlParams.get('page') || 'dashboard'; // Default to 'dashboard'
+
+    // Get all nav links
+    const navLinks = document.querySelectorAll('.nav__link');
+
+    navLinks.forEach(link => {
+        // Check if the link's href matches the current page
+        const linkPage = new URL(link.href).searchParams.get('page');
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+
+    /*==================== SHOW NAVBAR ====================*/
+    const showMenu = (headerToggle, navbarId) => {
+        const toggleBtn = document.getElementById(headerToggle),
+            nav = document.getElementById(navbarId);
+
+        // Validate that variables exist
+        if (headerToggle && navbarId) {
+            toggleBtn.addEventListener('click', () => {
+                // Toggle the menu visibility
+                nav.classList.toggle('show-menu');
+                // Change icon
+                toggleBtn.classList.toggle('bx-x');
+            });
+        }
+    };
+    showMenu('header-toggle', 'navbar');
+</script>
+
+
+
+
+
+
+
+</body></html>
